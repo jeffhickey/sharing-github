@@ -1,0 +1,122 @@
+-- What's the most expensive listing? What else can you tell me about the listing?
+
+SELECT 
+	*
+FROM den_listings
+JOIN den_reviews
+ON den_listings.id = den_reviews.listing_id
+ORDER BY price
+DESC
+LIMIT 100;
+
+
+The most expensive Denver listing is in LoHi (Lower Highlands) with a price of $9,999, 2 night minimum, it's only a private room which makes me think the listing price is incorrect. Does have a good location for walking and a "Jacuzzi!!". 
+
+"13523589"	"LOHI! MBR w jacuzzi!! Walk to Downtown or Broncos"	"35955223"	"Tom"		"Highland"	"39.75796243"	"-105.0137993"	"Private room"	"9999"	2	8	"2016-10-09"	"0.28"	1	"0"
+
+Changing LIMIT to 10 shows me that there are 9 other properties with a price of $9,999 which does not seem accurate. The next listing is for $3,100 for an entire home in Union Station - while very expensive this one does seem accurate. 30 night minimum, only avialable 62 nights a year, hosts are Michael and Donna. 
+
+"15599291"	"Amazing Downtown Larimer Condo - Hot Tub!"	"100535512"	"Michael And Donna"		"Union Station"	"39.75052216"	"-104.9951338"	"Entire home/apt"	"3100"	30	15	"2018-09-28"	"0.62"	1	"62"
+
+-- What neighborhoods seem to be the most popular?
+
+SELECT 
+	neighbourhood,
+	COUNT(*)
+FROM
+	den_listings
+GROUP BY 
+	neighbourhood
+ORDER BY 2 DESC;
+
+Five Points with 497 seems to be the most popular neighborhood to list on AirBNB
+
+"Five Points"	"497"
+"Highland"	"348"
+"Capitol Hill"	"273"
+"Speer"	"191"
+"Union Station"	"174"
+"Sunnyside"	"155"
+"West Highland"	"145"
+"CBD"	"138"
+"Whittier"	"132"
+"West Colfax"	"129"
+"Lincoln Park"	"125"
+"City Park West"	"123"
+"Baker"	"122"
+"Berkeley"	"119"
+"Congress Park"	"118"
+"Sloan Lake"	"118"
+"Jefferson Park"	"109"
+"Stapleton"	"104"
+"Cheesman Park"	"101"
+"Gateway - Green Valley Ranch"	"91"
+"North Capitol Hill"	"83"
+"Washington Park West"	"81"
+"Platt Park"	"78"
+"Clayton"	"73"
+"Cole"	"71"
+"North Park Hill"	"65"
+"Virginia Village"	"51"
+"Hale"	"51"
+"University"	"50"
+"Washington Park"	"47"
+"Northeast Park Hill"	"47"
+"City Park"	"46"
+"Skyland"	"44"
+"Regis"	"43"
+"Washington Virginia Vale"	"43"
+"Hampden South"	"43"
+"Villa Park"	"41"
+"Montclair"	"40"
+"South Park Hill"	"40"
+"Cherry Creek"	"37"
+"Athmar Park"	"36"
+"Chaffee Park"	"35"
+"Hampden"	"35"
+"University Park"	"34"
+"Civic Center"	"33"
+"University Hills"	"32"
+"Hilltop"	"30"
+"Barnum"	"30"
+"Mar Lee"	"30"
+"Overland"	"28"
+"Rosedale"	"27"
+"Ruby Hill"	"27"
+"Cory - Merrill"	"26"
+"Windsor"	"24"
+"Montbello"	"24"
+"East Colfax"	"23"
+"Indian Creek"	"21"
+"Lowry Field"	"20"
+"Barnum West"	"18"
+"Globeville"	"18"
+"Belcaro"	"16"
+"Marston"	"16"
+"Southmoor Park"	"15"
+"Country Club"	"13"
+"Westwood"	"13"
+"Harvey Park"	"12"
+"Valverde"	"12"
+"Bear Valley"	"11"
+"Fort Logan"	"10"
+"Goldsmith"	"9"
+"College View - South Platte"	"9"
+"Harvey Park South"	"7"
+"Wellshire"	"6"
+"Auraria"	"6"
+"DIA"	"5"
+"Sun Valley"	"3"
+"Elyria Swansea"	"3"
+"Kennedy"	"2"
+
+-- What time of year is the cheapest time to go to your city? What about the busiest?
+
+SELECT 
+	EXTRACT(MONTH FROM calender_date) AS MonthOfDate,
+	ROUND(AVG(listing_id))
+FROM 
+	den_calendar 
+GROUP BY
+	MonthOfDate
+;
