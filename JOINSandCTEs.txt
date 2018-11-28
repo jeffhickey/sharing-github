@@ -1,0 +1,95 @@
+-- What are the three longest trips on rainy days?
+
+WITH dayoftrip AS (
+	SELECT substring(start_date,0,11) AS date,
+	duration,
+	start_station,
+	end_station
+	FROM trips)
+	
+SELECT
+	dayoftrip.date,
+	dayoftrip.start_station,
+	dayoftrip.end_station,
+	dayoftrip.duration,
+	weather.events
+FROM 
+	dayoftrip
+JOIN 
+	weather
+ON 
+	dayoftrip.date = weather.date
+WHERE
+	events LIKE 'Rain'
+ORDER BY 
+	duration
+DESC
+LIMIT 3;
+
+-- Which station is full most often?
+
+SELECT
+	station_id,
+	COUNT(*)
+FROM
+	status
+WHERE 
+	docks_available = 0
+GROUP BY
+	station_id
+LIMIT 1;
+
+SELECT
+	name
+FROM
+	stations
+WHERE
+	station_id = 2;
+
+-- Return a list of stations with a count of number of trips starting at that station but ordered by dock count.
+
+SELECT
+	trips.start_station,
+	stations.dockcount,
+	COUNT(*)
+FROM
+	trips
+JOIN
+	stations
+ON
+	trips.start_station = stations.name
+GROUP BY
+	trips.start_station, stations.dockcount
+ORDER BY
+	stations.dockcount
+DESC
+;
+
+-- (Challenge) What's the length of the longest trip for each day it rains anywhere?
+
+WITH raindays AS (
+	SELECT 
+		DATE(date) raindate,
+		events
+	FROM weather
+	WHERE events LIKE 'Rain'),
+	
+raintrips AS (
+	SELECT 
+		start_station,
+		end_station,
+		duration,
+		DATE(trips.start_date) rain_trip_date
+	FROM trips
+	JOIN raindays
+	ON raindays.raindate = DATE(trips.start_date)
+	ORDER BY duration DESC
+	)
+	
+SELECT 
+	rain_trip_date,
+	MAX(duration) max_duration
+FROM raintrips
+GROUP BY rain_trip_date
+ORDER BY rain_trip_date
+;
