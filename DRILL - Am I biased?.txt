@@ -1,0 +1,15 @@
+
+- You're testing advertising emails for a bathing suit company and you test one version of the email in February and the other in May.
+
+Selection bias, it's fair to expect that advertising emails for a bathing suit company would have more success just before Summer (May) then the middle of Winter (February). Also February is the shortest month of the year, so there are less days for success. Should be a small factor, but something to consider.
+
+- You open a clinic to treat anxiety and find that the people who visit show a higher rate of anxiety than the general population.
+
+Selection bias. People visiting an anxiety clinic are more likely to suffer from anxiety.
+
+- You launch a new ad billboard based campaign and see an increase in website visits in the first week.
+
+Could be biased based off of location of the billboards, there's no guarantee the general population as a whole is equally likely to be subjected to the billboard campaign
+
+- You launch a loyalty program but see no change in visits in the first week.
+Did you even announce the loyalty program? Do people typically visit more than once a week? For instance if visits are typically once a week (or less) then you haven't given them a chance to even return. Not enough information.
