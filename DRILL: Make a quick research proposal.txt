@@ -1,0 +1,6 @@
+Problem: Users that download fitness app have showed increased activity after downloading the app. Is the app the cause or are people that are increasing activity more likely to download the app?
+
+Hypothesis: Downloading the app to track activity causes users to increase their activity.
+
+Design: Track activity data for a population that downloads the app and a population that does not. Compare, if there is a difference run a T-test to determine if the difference is from randomn variance or if it is statistically significant.
+
